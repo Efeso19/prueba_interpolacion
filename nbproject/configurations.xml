@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="90">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>Includes/ResourceHolder.hpp</itemPath>
+      <itemPath>Includes/ResourceHolder.inl</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>Recursos/Eagle.png</itemPath>
+      <itemPath>Recursos/OpenSans-Regular.ttf</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="Clases" displayName="Clases" projectFiles="true">
+        <itemPath>Clases/Game.cpp</itemPath>
+        <itemPath>Clases/Game.h</itemPath>
+        <itemPath>Clases/PhysicsState.cpp</itemPath>
+        <itemPath>Clases/PhysicsState.h</itemPath>
+        <itemPath>Clases/Player.cpp</itemPath>
+        <itemPath>Clases/Player.h</itemPath>
+        <itemPath>Clases/Render.cpp</itemPath>
+        <itemPath>Clases/Render.h</itemPath>
+      </logicalFolder>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>Clases</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <commandlineTool>g++</commandlineTool>
+          <incDir>
+            <pElem>/usr/local/SFML/include</pElem>
+            <pElem>Includes</pElem>
+          </incDir>
+          <commandLine>-lsfml-graphics -lsfml-window -lsfml-system</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/local/SFML/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>sfml-audio</linkerLibLibItem>
+            <linkerLibLibItem>sfml-graphics</linkerLibLibItem>
+            <linkerLibLibItem>sfml-network</linkerLibLibItem>
+            <linkerLibLibItem>sfml-system</linkerLibLibItem>
+            <linkerLibLibItem>sfml-window</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="Clases/Game.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Game.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/PhysicsState.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/PhysicsState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/Player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Player.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/Render.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Render.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Includes/ResourceHolder.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Includes/ResourceHolder.inl" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos/Eagle.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos/OpenSans-Regular.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+          <incDir>
+            <pElem>/usr/local/SFML/include</pElem>
+            <pElem>Includes</pElem>
+          </incDir>
+          <commandLine>-lsfml-graphics -lsfml-window -lsfml-system</commandLine>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/local/SFML/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>sfml-audio</linkerLibLibItem>
+            <linkerLibLibItem>sfml-graphics</linkerLibLibItem>
+            <linkerLibLibItem>sfml-network</linkerLibLibItem>
+            <linkerLibLibItem>sfml-system</linkerLibLibItem>
+            <linkerLibLibItem>sfml-window</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="Clases/Game.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Game.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/PhysicsState.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/PhysicsState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/Player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Player.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Clases/Render.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Clases/Render.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Includes/ResourceHolder.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Includes/ResourceHolder.inl" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos/Eagle.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos/OpenSans-Regular.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
