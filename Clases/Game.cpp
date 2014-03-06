@@ -2,10 +2,7 @@
 
 
 /************ VARIABLES GLOBALES ************/
-
-const float Game::velPlayer = 180.f;
-const float Game::angPlayer = 140.f;
-const sf::Time Game::timePerFrame = sf::seconds(1000.f/15.f);
+const sf::Time Game::timePerFrame = sf::seconds(1.f/15.f);
 const int ancho = 640, alto = 480;
 const float segStatistics = 0.5f; //segundos de refresco de las estadisticas
 
@@ -17,10 +14,8 @@ Game::Game()
 : window(sf::VideoMode(ancho, alto, 24), "TITULO APLICACION", sf::Style::Close)
 , contFonts()
 , contTextures()
-, sprite()
 , mStatisticsText()
-, mStatisticsUpdateTime()
-, mStatisticsNumFrames(0)
+, player()
 , isMovingUp(false)
 , isMovingDown(false)
 , isMovingRight(false)
@@ -28,6 +23,7 @@ Game::Game()
 , mIsRotatingLeft(false)
 , mIsRotatingRight(false)
 , firstTime(true)
+, isInterpolating(false)
 {
 	window.setVerticalSyncEnabled(true); //Para evitar cortes en los refrescos
 	window.setFramerateLimit(125);	//Establecemos maximo real de procesamiento (aunque trabajamos con 60)
@@ -45,15 +41,12 @@ Game::Game()
     
 	
    //Configuramos Items
-	sprite.setTexture(contTextures.get(Textures::Plane));       //Iniciamos el sprite con la imagen
-	sprite.setPosition(100.f, 100.f);
-	
-	//Centramos el Eje de Rotacion del Sprite (así conseguimos una rotación centrada)
-	sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
+	player.Init(contTextures.get(Textures::Plane),200.f, 250.f);
 	
 	mStatisticsText.setFont(contFonts.get(Fonts::OpenSans));
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(13);
+	mStatisticsText.setString("Interpolacion Desactivada (X)");
 }
 
 
@@ -73,17 +66,20 @@ void Game::run()    //Metodo principal
         
 		processEvents();
 		
+		
         //Llevamos control en las actualizaciones por frame
 		while (timeSinceLastUpdate > timePerFrame)   // 15 veces/segundo
 		{
 			timeSinceLastUpdate -= timePerFrame;
             
             //Realizamos actualizaciones
-			update(timePerFrame);            
+			update(timePerFrame);       
+			
 		}
-        
-		updateStatistics(elapsedTime);  //Actualización de pantalla a tiempo de ejecución
-        render();
+		
+		interpolation = (float)std::min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+
+        render(interpolation);
 	}
 }
 
@@ -93,43 +89,39 @@ void Game::run()    //Metodo principal
 
 void Game::update(sf::Time elapsedTime)     //Actualiza la fisica
 {
+	float horiz = 0.f, vertic=0.f;
 	if(!firstTime)
 	{
-		//Variables auxiliares
-		sf::Vector2f movement(0.f, 0.f);
-		sf::Vector2f posicion = sprite.getPosition();
-		sf::Vector2f origin = sprite.getOrigin();
-		float ang = 0.f;
-
-		// Actualizamos fisicas (posicion o rotacion)
-		if (isMovingUp && (posicion.y - origin.y) > 0)
-			movement.y -= velPlayer;
-		if (isMovingDown && (posicion.y + origin.y) < alto)
-			movement.y += velPlayer;
-		if (isMovingLeft && (posicion.x - origin.x) > 0)
-			movement.x -= velPlayer;
-		if (isMovingRight && (posicion.x + origin.x) < ancho)
-			movement.x += velPlayer;
-
-		/*if(mIsRotatingLeft)
-			ang -= angPlayer;
-		if(mIsRotatingRight)
-			ang += angPlayer;*/
-
-		// Movemos y rotamos Sprite real
-		sprite.move(movement * elapsedTime.asSeconds());
-	   // sprite.rotate(ang * elapsedTime.asSeconds());
+		sf::Vector2f vel;
+		
+		
+		if(isMovingDown)
+			vertic = 300.f;
+		if(isMovingUp)
+			vertic = -300.f;
+		if(isMovingLeft)
+			horiz = -300.f;
+		if(isMovingRight)
+			horiz = 300.f;
+			
+		vel = sf::Vector2f(horiz,vertic);
+			
+		player.Update(vel, elapsedTime);
 	}
 	
 	firstTime=false;
 }
 
-void Game::render()     //Dibuja
+void Game::render(float interpolation)     //Dibuja
 {
 	window.clear();
 	//window.draw(sprite);
 	
 	//LLAMAR AL DRAW DEL PLAYER
+	if(isInterpolating)
+		player.DrawWithInterpolation(window, interpolation);
+	else
+		player.Draw(window);
 	
 	window.draw(mStatisticsText);
 	window.display();
@@ -179,4 +171,13 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
         mIsRotatingLeft = isPressed;
     else if (key == sf::Keyboard::S)
         mIsRotatingRight = isPressed;
+	
+	else if (key == sf::Keyboard::X && isPressed){
+		isInterpolating = !isInterpolating;
+		
+		if(isInterpolating)
+			mStatisticsText.setString("Interpolacion Activada (X)");
+		else
+			mStatisticsText.setString("Interpolacion Desactivada (X)");
+	}
 }

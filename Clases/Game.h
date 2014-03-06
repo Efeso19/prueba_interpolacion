@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../Includes/ResourceHolder.hpp"
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 // ID's para cargar texturas (usar con Textures::ID)
 namespace Textures
@@ -37,16 +38,13 @@ public:
 private:
     void			processEvents();  // Captura y procesa eventos
     void			update(sf::Time elapsedTime);
-    void			render();
-    
-    void			updateStatistics(sf::Time elapsedTime);
+    void			render(float interpolation);
     void			handlePlayerInput(sf::Keyboard::Key key, bool isPressed);  // Maneja eventos
     
     
 private:
-    static const float		velPlayer;
-    static const float          angPlayer;
     static const sf::Time	timePerFrame;
+	
     
     //Recursos
     ResourceHolder<sf::Texture, Textures::ID>	contTextures;
@@ -54,21 +52,24 @@ private:
     
     //Graficos
     sf::RenderWindow		window;
-    sf::Sprite			sprite;
+	Player					player;
     
     //Estadisticas
     sf::Text			mStatisticsText;
-    sf::Time			mStatisticsUpdateTime;
-    std::size_t			mStatisticsNumFrames;
     
+	
+	float		interpolation;
+	
     //Eventos
     bool			isMovingUp;
     bool			isMovingDown;
     bool			isMovingRight;
     bool			isMovingLeft;
-    bool                        mIsRotatingLeft;
-    bool                        mIsRotatingRight;
+    bool            mIsRotatingLeft;
+    bool            mIsRotatingRight;
+	
 	bool			firstTime;
+	bool			isInterpolating;
 };
 
 

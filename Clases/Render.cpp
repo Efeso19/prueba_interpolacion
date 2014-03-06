@@ -18,7 +18,7 @@ Render::~Render() {
 
 
 
-void Render::SetTexture(const sf::Texture tex)
+void Render::SetTexture(sf::Texture tex)
 {
 	sprite = sf::Sprite(tex);
 }

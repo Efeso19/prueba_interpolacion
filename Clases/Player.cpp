@@ -16,12 +16,28 @@ Player::Player(const Player& orig) {
 Player::~Player() {
 }
 
-void Player::Init(const sf::Texture tex, float posX, float posY, float speedX, float speedY, float maxSpeedX, float maxSpeedY){
+void Player::Init(sf::Texture tex, float posX, float posY, float speedX, float speedY, float maxSpeedX, float maxSpeedY){
 
 	renderState.SetTexture(tex);
 	
-	physicsState.SetPosition(sf::Vector2f(posX, posY));
-	physicsState.SetSpeed(sf::Vector2f(speedX, speedY));
-	physicsState.SetMaxSpeed(sf::Vector2f(maxSpeedX, maxSpeedY));
-	physicsState.SetMaxSpeed(sf::Vector2f(maxSpeedX, maxSpeedY));
+	physicsState.SetPosition(posX, posY);
+	physicsState.SetSpeed(speedX, speedY);
+	physicsState.SetMaxSpeed(maxSpeedX, maxSpeedY);
+}
+
+void Player::Update(sf::Vector2f velocity, sf::Time elapsedTime){
+
+	physicsState.SetSpeed(velocity);
+	physicsState.Update(elapsedTime);
+}
+
+void Player::Draw(sf::RenderWindow& window){
+
+	renderState.GetSprite().setPosition(physicsState.GetPosition());
+	window.draw(renderState.GetSprite());
+}
+
+void Player::DrawWithInterpolation(sf::RenderWindow& window, float interpolation){
+
+	renderState.Draw(window, physicsState.GetPreviousPosition(), physicsState.GetPosition(), interpolation);
 }
