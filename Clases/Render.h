@@ -16,9 +16,9 @@ public:
 	Render(const Render& orig);
 	virtual ~Render();
 	
-	void SetTexture(const sf::Texture tex);
+	void SetTexture(sf::Texture &tex);
 	void Draw(sf::RenderWindow &window, const sf::Vector2f &posPrev, const sf::Vector2f &posNew, float interpolation);
-	sf::Sprite& GetSprite() { return sprite; }
+	sf::Sprite &GetSprite() { return sprite; }
 	sf::Vector2f GetRenderPosition() const { return renderPos; }
 
 private:

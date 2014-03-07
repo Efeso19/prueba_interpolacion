@@ -16,7 +16,7 @@ Player::Player(const Player& orig) {
 Player::~Player() {
 }
 
-void Player::Init(sf::Texture tex, float posX, float posY, float speedX, float speedY, float maxSpeedX, float maxSpeedY){
+void Player::Init(sf::Texture &tex, float posX, float posY, float speedX, float speedY, float maxSpeedX, float maxSpeedY){
 
 	renderState.SetTexture(tex);
 	

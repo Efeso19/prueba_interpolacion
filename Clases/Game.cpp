@@ -46,6 +46,7 @@ Game::Game()
 	mStatisticsText.setFont(contFonts.get(Fonts::OpenSans));
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(13);
+	mStatisticsText.setColor(sf::Color::Black);
 	mStatisticsText.setString("Interpolacion Desactivada (X)");
 }
 
@@ -114,7 +115,7 @@ void Game::update(sf::Time elapsedTime)     //Actualiza la fisica
 
 void Game::render(float interpolation)     //Dibuja
 {
-	window.clear();
+	window.clear(sf::Color::White);
 	//window.draw(sprite);
 	
 	//LLAMAR AL DRAW DEL PLAYER
